@@ -1,0 +1,7 @@
+# Normalize line endings
+* text=auto eol=lf
+*.sh text eol=lf
+
+# Language stats: count Java as the project language, ignore vendored/docs noise
+*.java linguist-language=Java
+docs/* linguist-documentation

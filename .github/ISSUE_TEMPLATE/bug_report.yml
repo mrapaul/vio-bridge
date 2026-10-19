@@ -1,0 +1,42 @@
+name: Bug report
+description: Something isn't working with VIO Bridge
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Connect the VIO
+        2. Pick a destination
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: vio-firmware
+    attributes:
+      label: VIO firmware version
+      description: Shown in the app log on connect (e.g. 4.0.621)
+  - type: input
+    id: phone
+    attributes:
+      label: Phone & Android version
+      placeholder: e.g. Samsung Galaxy, Android 16
+  - type: input
+    id: app-version
+    attributes:
+      label: VIO Bridge version
+      placeholder: e.g. 1.3
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: From `adb logcat -s VioBridge`. Please remove anything private.
+      render: shell

@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an idea for VIO Bridge
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: This does not involve writing to the VIO firmware channel
+          required: true
