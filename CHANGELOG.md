@@ -38,6 +38,6 @@ the `--version-name` in `build.sh`.
 - Boot auto-start and a foreground service.
 
 [1.3]: https://github.com/mrapaul/vio-bridge/releases/tag/v1.3
-[1.2]: https://github.com/mrapaul/vio-bridge/releases/tag/v1.2
-[1.1]: https://github.com/mrapaul/vio-bridge/releases/tag/v1.1
-[1.0]: https://github.com/mrapaul/vio-bridge/releases/tag/v1.0
+
+<!-- 1.0–1.2 predate the public repo and have no tagged release. -->
+
