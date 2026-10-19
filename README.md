@@ -1,5 +1,10 @@
 # VIO Bridge
 
+[![build](https://github.com/mrapaul/vio-bridge/actions/workflows/build.yml/badge.svg)](https://github.com/mrapaul/vio-bridge/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+📖 **Project write-up:** <https://mrapaul.github.io/vio-bridge/>
+
 An independent Android app that drives a **TomTom VIO** handlebar display from a
 phone, showing turn-by-turn **bike** navigation — with its own routing engine, so
 it works without the official TomTom scooter app.
