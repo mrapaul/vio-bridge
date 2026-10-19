@@ -372,14 +372,23 @@ public class VioService extends Service {
             Log.add("Streaming frames");
             while (running) {
                 long started = System.currentTimeMillis();
-                Bitmap frame = renderer.draw(battery);
-                lastFrame = frame.copy(Bitmap.Config.ARGB_8888, false);
                 updateBrightness();
                 updateLocation();
-                byte[] png = IndexedPng.encode(frame, MAX_PNG);
+                byte[] png;
+                if (asleep() && lastPng != null) {
+                    // Screen is off after arrival: reuse the last frame instead of spending
+                    // phone CPU re-rendering and encoding one no one can see.
+                    png = lastPng;
+                } else {
+                    Bitmap frame = renderer.draw(battery);
+                    lastFrame = frame.copy(Bitmap.Config.ARGB_8888, false);
+                    png = IndexedPng.encode(frame, MAX_PNG);
+                }
                 // An unchanged screen isn't resent (saves the VIO's battery), apart from a keepalive.
                 if (java.util.Arrays.equals(png, lastPng) && started - lastSentAt < KEEPALIVE_MS) {
-                    drain(MIN_FRAME_MS);
+                    // While asleep, poll a bit slower (no rendering) but still often enough
+                    // that a tap wakes the screen within half a second.
+                    drain(asleep() ? 500 : MIN_FRAME_MS);
                     continue;
                 }
                 lastPng = png;
@@ -411,15 +420,22 @@ public class VioService extends Service {
         private byte[] lastPng;
         private int brightnessSet = -1;
 
-        /** Full brightness while navigating, dimmed otherwise. */
+        /** Full brightness while navigating, dimmed when idle, off once arrived. */
         private void updateBrightness() throws IOException {
             int normal = getSharedPreferences("vio", MODE_PRIVATE).getInt("brightness", 50);
             boolean awake = NavState.active || System.currentTimeMillis() - lastTouchAt < TOUCH_WAKE_MS;
-            int want = awake ? normal : Math.min(normal, IDLE_BRIGHTNESS);
+            int want = awake ? normal : NavState.arrived ? 0 : Math.min(normal, IDLE_BRIGHTNESS);
             if (want == brightnessSet) return;
             brightnessSet = want;
             service(func(F_SET_BRIGHTNESS, want));
-            Log.add("VIO brightness set to " + want + "%" + (awake ? "" : " (no route, dimmed)"));
+            String why = awake ? "" : want == 0 ? " (arrived, asleep)" : " (no route, dimmed)";
+            Log.add("VIO brightness set to " + want + "%" + why);
+        }
+
+        /** After arrival, the VIO sleeps: screen off and no re-rendering until a touch wakes it. */
+        private boolean asleep() {
+            return NavState.arrived && !NavState.active
+                    && System.currentTimeMillis() - lastTouchAt >= TOUCH_WAKE_MS;
         }
 
         private long lastSentAt, lastBatteryPoll = System.currentTimeMillis();

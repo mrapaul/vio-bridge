@@ -130,6 +130,8 @@ public final class Navigator {
         s.modifier = "straight";
         NavState.update("", destName.isEmpty() ? "You have arrived" : "Arrived: " + destName, "",
                 TurnIcons.get(s), "built-in");
+        // Show the arrival screen for the hold, then let the VIO sleep (screen off) to save power.
+        NavState.arrived = true;
         Log.add("Arrived at " + destName + (reroutes > 0 ? " after " + reroutes + " reroutes" : ""));
         main.postDelayed(Navigator::stop, ARRIVED_HOLD_MS);
     }

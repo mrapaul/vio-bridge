@@ -3,6 +3,14 @@
 All notable changes to this project are documented here. Versions correspond to
 the `--version-name` in `build.sh`.
 
+## [1.4] — 2026-10-19
+
+### Added
+- **Sleep after arrival.** Once the destination is reached and the arrival screen
+  has been shown, the VIO turns its screen off (brightness 0) and the phone stops
+  re-rendering and encoding frames — saving power on both the display and the
+  phone. A tap on the VIO, or starting a new route, wakes it.
+
 ## [1.3] — 2026-10-19
 
 ### Changed
@@ -37,6 +45,7 @@ the `--version-name` in `build.sh`.
 - Battery-aware rendering: unchanged frames aren't re-sent; idle auto-dimming.
 - Boot auto-start and a foreground service.
 
+[1.4]: https://github.com/mrapaul/vio-bridge/releases/tag/v1.4
 [1.3]: https://github.com/mrapaul/vio-bridge/releases/tag/v1.3
 
 <!-- 1.0–1.2 predate the public repo and have no tagged release. -->

@@ -12,7 +12,7 @@ KEY=$HOME/.android/vio-bridge.keystore
 rm -rf "$OUT" && mkdir -p "$OUT/classes" "$OUT/dex"
 
 "$BT/aapt2" link -o "$OUT/base.apk" -I "$JAR" --manifest AndroidManifest.xml \
-    --min-sdk-version 29 --target-sdk-version 36 --version-code 13 --version-name 1.3
+    --min-sdk-version 29 --target-sdk-version 36 --version-code 14 --version-name 1.4
 
 javac --release 17 -Xlint:-options -cp "$JAR" -d "$OUT/classes" $(find src -name '*.java')
 

@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 /** Latest Google Maps navigation step, shared between the listener and the renderer. */
 public final class NavState {
     public static volatile boolean active;
+    /** Set once the destination is reached, so the VIO can sleep until touched or re-used. */
+    public static volatile boolean arrived;
     public static volatile String distance = "";
     public static volatile String instruction = "";
     public static volatile String eta = "";
@@ -22,6 +24,8 @@ public final class NavState {
     private NavState() {}
 
     public static void update(String distance, String instruction, String eta, Bitmap arrow, String raw) {
+        // Any live navigation update (a new route, the next step, rerouting) wakes the VIO.
+        NavState.arrived = false;
         NavState.distance = distance == null ? "" : distance;
         NavState.instruction = instruction == null ? "" : instruction;
         NavState.eta = eta == null ? "" : eta;
