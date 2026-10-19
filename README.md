@@ -9,6 +9,12 @@ An independent Android app that drives a **TomTom VIO** handlebar display from a
 phone, showing turn-by-turn **bike** navigation — with its own routing engine, so
 it works without the official TomTom scooter app.
 
+<p align="center">
+  <img src="docs/vio-demo.gif" alt="VIO Bridge navigating to Amsterdam Centraal on the TomTom VIO" width="320">
+  <br>
+  <em>Actual rendered VIO frames: turn-by-turn card, heading-up map, and arrival.</em>
+</p>
+
 The VIO is a small round 320×320 screen that pairs over Bluetooth and speaks
 TomTom's "Forza" display protocol. VIO Bridge reverse-engineers just enough of
 that protocol to render its own screens (map, directions, battery, clock) and to

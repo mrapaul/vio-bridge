@@ -14,6 +14,12 @@ the MIT license.
 > **Unofficial project.** I'm not affiliated with TomTom, and this isn't endorsed
 > by them. It's interoperability work on a device I own. Use at your own risk.
 
+<p align="center">
+  <img src="vio-demo.gif" alt="VIO Bridge navigating to Amsterdam Centraal" width="320">
+  <br>
+  <em>These are the actual frames the app streams to the VIO — turn card, map, arrival.</em>
+</p>
+
 ## The device, and the gap
 
 The VIO is a nice piece of hardware going mostly unused: a sunlight-readable round
